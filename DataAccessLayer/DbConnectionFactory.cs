@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
-namespace Repos
+namespace DataAccessLayer
 {
     class DbConnectionFactory
     {
@@ -14,8 +14,14 @@ namespace Repos
 
             switch (dbType)
             {
-                case EDbConnectionTypes.Sql:
+                case EDbConnectionTypes.SQL:
                     connection = new SqlConnection(connectionString);
+                    break;
+                case EDbConnectionTypes.XML:
+                    // TODO: Implement XML Connection (path name)
+                    break;
+                case EDbConnectionTypes.DOCUMENT:
+                    // TODO: Implement Document DB connection
                     break;
                 default:
                     connection = null;
@@ -29,8 +35,8 @@ namespace Repos
 
     public enum EDbConnectionTypes
     {
-        Sql,
-        Mongo,
-        Xml
+        SQL,
+        DOCUMENT,
+        XML
     }
 }

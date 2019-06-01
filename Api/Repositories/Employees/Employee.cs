@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Repos
+namespace Api
 {
     public class Employee
     {

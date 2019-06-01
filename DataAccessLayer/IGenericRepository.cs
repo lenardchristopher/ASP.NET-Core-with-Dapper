@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Repos
+namespace DataAccessLayer
 {
     public interface IGenericRepository<TEntity>
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<TEntity> GetAsync(int id);
+        Task<TEntity> FindAsync(int id);
         void InsertAsync(TEntity entity);
         void DeleteAsync(int id);
         void UpdateAsync(TEntity entityToUpdate);

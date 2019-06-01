@@ -4,8 +4,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
+using DataAccessLayer;
 
-namespace Repos
+namespace Api
 {
     public class EmployeeRepository : SqlRepository<Employee>, IEmployeeRepository
     {
@@ -13,7 +14,7 @@ namespace Repos
 
         public override async void DeleteAsync(int id)
         {
-            using(var conn = GetOpenConnection())
+            using (var conn = GetOpenConnection())
             {
                 var sql = "DELETE FROM Employee WHERE Id = @Id";
                 var parameters = new DynamicParameters();
@@ -31,7 +32,7 @@ namespace Repos
             }
         }
 
-        public override async Task<Employee> GetAsync(int id)
+        public override async Task<Employee> FindAsync(int id)
         {
             using (var conn = GetOpenConnection())
             {
@@ -58,9 +59,9 @@ namespace Repos
 
         public override async void UpdateAsync(Employee entityToUpdate)
         {
-            using(var conn = GetOpenConnection())
+            using (var conn = GetOpenConnection())
             {
-                var existingEntity = await GetAsync(entityToUpdate.Id);
+                var existingEntity = await FindAsync(entityToUpdate.Id);
 
                 var sql = "UPDATE Employee "
                     + "SET ";
@@ -79,6 +80,11 @@ namespace Repos
 
                 await conn.QueryAsync(sql, parameters);
             }
+        }
+
+        public Task<bool> MyCustomRepositoryMethodExampleAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

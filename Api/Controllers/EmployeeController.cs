@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Repos;
 
 namespace Api.Controllers
 {
@@ -26,21 +25,21 @@ namespace Api.Controllers
         public IActionResult Create(Employee employee)
         {
             _employeeRepo.InsertAsync(employee);
-            return CreatedAtRoute("Employee/Create", true);
+            return Ok();
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, Employee employee)
         {
             _employeeRepo.UpdateAsync(employee);
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             _employeeRepo.DeleteAsync(id);
-            return NoContent();
+            return Ok();
         }
     }
 }

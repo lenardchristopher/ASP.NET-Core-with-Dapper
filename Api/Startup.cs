@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Repos;
 
 namespace Api
 {
@@ -27,6 +26,7 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // There's more than one way to skin a cat. In an enterprise app, I would configure this via the Options Pattern using IOptions
             services.AddTransient<IEmployeeRepository>(x => new EmployeeRepository(Configuration.GetConnectionString("Default")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
